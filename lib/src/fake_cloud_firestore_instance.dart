@@ -73,8 +73,11 @@ class FakeFirebaseFirestore implements FirebaseFirestore {
   }
 
   @override
-  Future<T> runTransaction<T>(TransactionHandler<T> transactionHandler,
-      {Duration timeout = const Duration(seconds: 30)}) async {
+  Future<T> runTransaction<T>(
+    TransactionHandler<T> transactionHandler, {
+    Duration timeout = const Duration(seconds: 30),
+    int maxAttempts = 5,
+  }) async {
     Transaction transaction = _DummyTransaction();
     return await transactionHandler(transaction);
   }
